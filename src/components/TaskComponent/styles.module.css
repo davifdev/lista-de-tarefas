@@ -1,0 +1,72 @@
+.taskComponent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  width: 100%;
+  background: var(--gray-500);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--gray-400);
+  font-size: 13px;
+  gap: 12px;
+  color: var(--gray-100);
+}
+
+.checkBox {
+  width: 17px;
+  height: 17px;
+  border: 1px solid var(--blue);
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+}
+
+.checkBox:hover {
+  background-color: var(--blue-dark);
+}
+
+.checkBoxChecked {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: var(--purple-dark) url(../../../public/check.svg) no-repeat center
+    center / 10px;
+}
+
+.checkBoxChecked:hover {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: var(--purple) url(../../../public/check.svg) no-repeat center
+    center / 10px;
+}
+
+.trashIcon {
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trashIcon svg {
+  width: 12px;
+  height: 14px;
+}
+
+.trashIcon svg:hover {
+  fill: var(--danger);
+}
+
+.trashIcon:hover {
+  background: var(--gray-400);
+}
+
+.taskComplete {
+  text-decoration: line-through;
+}

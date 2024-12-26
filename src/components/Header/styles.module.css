@@ -1,0 +1,74 @@
+.header {
+  background-color: var(--gray-700);
+  height: 200px;
+  display: flex;
+  position: relative;
+}
+
+.headerItems {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.iconHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.iconHeader img {
+  width: 50px;
+  height: 50px;
+}
+
+.iconHeader strong {
+  color: var(--blue);
+  font-size: 40px;
+}
+
+.formHeader {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 175px;
+}
+
+.formHeader input {
+  background: var(--gray-500);
+  padding: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  width: 638px;
+  margin-right: 8px;
+  color: var(--gray-100);
+}
+
+.formHeader input:focus {
+  outline: 1px solid var(--blue);
+}
+
+.formHeader input::placeholder {
+  font-size: 1rem;
+  color: var(--gray-300);
+  font-family: "Inter", serif;
+}
+
+.formHeader button {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: var(--blue-dark);
+  color: var(--gray-100);
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.formHeader button:hover {
+  background: var(--blue);
+}

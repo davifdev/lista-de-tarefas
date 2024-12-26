@@ -1,0 +1,47 @@
+.sectionTasks {
+    padding-top: 88px;
+}
+
+.taskInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.taskInfo strong {
+    color: var(--blue);
+    display: block;
+}
+
+.taskInfo  span {
+    width: 25px;
+    height: 19px;
+    border-radius: 50%;
+    background: var(--gray-400);
+    color: var(--gray-200);
+    padding: 2px 8px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+.taskLeft,
+.taskRight {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+
+.taskRight strong {
+    color: var(--purple);
+}
+
+.tasks {
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
