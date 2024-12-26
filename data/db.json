@@ -3,27 +3,27 @@
     {
       "id": "b695",
       "task": "Academia",
-      "concluido": false
+      "concluido": true
     },
     {
       "id": "cd54",
       "task": "Estudar",
-      "concluido": false
+      "concluido": true
     },
     {
       "id": "e903",
       "task": "Caminhada",
-      "concluido": false
+      "concluido": true
     },
     {
       "id": "859f",
       "task": "Leitura",
-      "concluido": false
+      "concluido": true
     },
     {
-      "id": "b597",
-      "task": "Praticar Ingles",
-      "concluido": false
+      "id": "ebee",
+      "task": "Estudar Progamação",
+      "concluido": true
     }
   ]
 }

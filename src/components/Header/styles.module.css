@@ -29,9 +29,11 @@
 
 .formHeader {
   display: flex;
+  justify-content: center;
   align-items: center;
   position: absolute;
   top: 175px;
+  width: 100%;
 }
 
 .formHeader input {
