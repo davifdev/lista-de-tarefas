@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import { httpConfig } from "./hooks/useFetch";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
+import TaskForm from "./components/TaskForm";
+import TaskList from "./components/TaskList";
+
+const endPoint = "http://localhost:3000/tarefas";
 
 function App() {
   const [task, setTask] = useState("");
@@ -15,7 +17,7 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:3000/tarefas");
+      const response = await fetch(endPoint);
       const data = await response.json();
       setTasks(data);
     } catch (error) {
@@ -33,30 +35,21 @@ function App() {
 
   const postData = async () => {
     if (task.trim().length < 3) return;
-    await fetch(`http://localhost:3000/tarefas`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        tarefa: task,
-      }),
-    });
+    const objConfig = {
+      tarefa: task,
+    };
 
+    await httpConfig(endPoint, "POST", objConfig);
     await fetchData();
   };
 
   const patchData = async () => {
-     if (taskEdit.trim().length < 3) return;
-    await fetch(`http://localhost:3000/tarefas/${taskId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        tarefa: taskEdit,
-      }),
-    });
+    if (taskEdit.trim().length < 3) return;
+    const objConfig = {
+      tarefa: taskEdit,
+    };
+
+    await httpConfig(endPoint, "PATCH", objConfig, taskId);
 
     setIsEdit(false);
     setTaskEdit("");
@@ -87,79 +80,28 @@ function App() {
   };
 
   const handleDelete = async (_task) => {
-    await fetch(`http://localhost:3000/tarefas/${_task.id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
-
-   await fetchData();
+    await httpConfig(endPoint, "DELETE", null, _task.id);
+    await fetchData();
   };
 
   return (
     <div className="m-6 flex flex-col items-center justify-center gap-12">
       <div className="flex flex-col gap-2">
-        <form className="flex items-center gap-1" onSubmit={handleSubmit}>
-          {!isEdit ? (
-            <input
-              type="text"
-              placeholder="Digite uma tarefa"
-              className="bg-white p-2 rounded-sm text-gray-900 placeholder:text-gray-900 w-90"
-              onChange={(e) => setTask(e.target.value)}
-              value={task}
-              ref={inputRef}
-              minLength={3}
-            />
-          ) : (
-            <input
-              type="text"
-              placeholder="Edite uma tarefa"
-              className="bg-white p-2 rounded-sm text-gray-900 placeholder:text-gray-900 w-90"
-              onChange={(e) => setTaskEdit(e.target.value)}
-              value={taskEdit}
-              ref={inputRef}
-              minLength={3}
-            />
-          )}
+        <TaskForm
+          handleSubmit={handleSubmit}
+          isEdit={isEdit}
+          taskEdit={taskEdit}
+          task={task}
+          inputRef={inputRef}
+          setTask={setTask}
+          setTaskEdit={setTaskEdit}
+        />
 
-          <button
-            type="submit"
-            className="bg-blue-500 p-2 rounded-sm cursor-pointer hover:bg-blue-600"
-          >
-            {!isEdit ? "Criar Tarefa" : "Editar Tarefa"}
-          </button>
-        </form>
-
-        <div className="flex flex-col gap-2">
-          {tasks &&
-            tasks.map((task) => (
-              <div
-                className="bg-white w-full p-2 flex items-center justify-between "
-                key={task.id}
-              >
-                <span className="text-gray-900 ">{task.tarefa}</span>
-
-                <div className="flex items-center gap-2">
-                  <FontAwesomeIcon
-                    icon={faPenToSquare}
-                    style={{ color: "#1df401" }}
-                    className="cursor-pointer"
-                    onClick={() => handleEdit(task)}
-                  />
-                  <FontAwesomeIcon
-                    icon={faTrash}
-                    style={{ color: "#f20707" }}
-                    className="cursor-pointer"
-                    onClick={() => handleDelete(task)}
-                  />
-                </div>
-              </div>
-            ))}
-          {tasks.length === 0 && (
-            <p className="text-center mt-4">Nenhuma Tarefa foi cadastrada</p>
-          )}
-        </div>
+        <TaskList
+          tasks={tasks}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+        />
       </div>
     </div>
   );
